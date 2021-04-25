@@ -9,6 +9,9 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+/.idea/
+UserSettings
+Packages
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -58,3 +61,13 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+#specifics
+ADX2PythonScripts/
+ProjectSettings/
+Assets/ChangeCueLimit*
+
+#ADX2
+Assets/Editor/CriWare/
+Assets/Gizmos/CriWare*
+Assets/Plugins
+Assets/StreamingAssets*

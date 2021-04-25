@@ -1,0 +1,31 @@
+import cri.atomcraft.project as acproject
+import cri.atomcraft.build as acbuild
+
+# ワークユニットを取得
+workunit = acproject.get_workunit("WorkUnit_0")["data"]
+# キューシートルートフォルダ
+cuesheet_rootfolder = acproject.get_cuesheet_rootfolder(workunit)["data"]
+# キューシートフォルダ「WorkUnit_0」を取得
+cuesheet_folder = acproject.get_child_object(cuesheet_rootfolder, "CueSheetFolder", "WorkUnit_0")["data"]
+# キューシートを取得
+cuesheet = acproject.get_child_object(cuesheet_folder, "CueSheet", CUE_SHEET_NAME)["data"]
+# キューを取得
+cue = acproject.get_child_object(cuesheet, "Cue", CUE_NAME)["data"]
+# キューの再生数上限を設定
+acproject.set_value(cue, "CueLimitEnableFlag", True)
+# キューの再生数上限を変更
+acproject.set_value(cue, "CueLimitNum", CUE_LIMIT_NUM)
+# キューの再生を先着優先に
+acproject.set_value(cue, "CuePriorityType", CUE_PRIORITY_TYPE)
+# ワークユニットを保存
+acproject.save_workunit(workunit)
+# ユーザー設定を取得
+user_settings = acproject.get_user_settings()["data"]
+# Unity向け出力フラグを設定
+acproject.set_value(user_settings,"BuildForUnityFlag", True)
+# ターゲットコンフィグフォルダーの取得
+target_config_folder = acproject.get_global_folder("TargetConfigFolder")["data"]
+# PCターゲットコンフィグの取得
+target_config_public = acproject.get_child_object(target_config_folder, "TargetConfigPublic", "Public")["data"]
+
+result = acbuild.build_cuesheet(cuesheet, target_config_public, None)["succeed"]
