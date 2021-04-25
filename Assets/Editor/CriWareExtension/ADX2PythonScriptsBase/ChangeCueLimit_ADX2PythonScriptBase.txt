@@ -2,11 +2,11 @@ import cri.atomcraft.project as acproject
 import cri.atomcraft.build as acbuild
 
 # ワークユニットを取得
-workunit = acproject.get_workunit("WorkUnit_0")["data"]
+workunit = acproject.get_workunit(WORK_UNIT_NAME)["data"]
 # キューシートルートフォルダ
 cuesheet_rootfolder = acproject.get_cuesheet_rootfolder(workunit)["data"]
 # キューシートフォルダ「WorkUnit_0」を取得
-cuesheet_folder = acproject.get_child_object(cuesheet_rootfolder, "CueSheetFolder", "WorkUnit_0")["data"]
+cuesheet_folder = acproject.get_child_object(cuesheet_rootfolder, "CueSheetFolder", CUE_SHEET_FOLDER_NAME)["data"]
 # キューシートを取得
 cuesheet = acproject.get_child_object(cuesheet_folder, "CueSheet", CUE_SHEET_NAME)["data"]
 # キューを取得
@@ -25,7 +25,7 @@ user_settings = acproject.get_user_settings()["data"]
 acproject.set_value(user_settings,"BuildForUnityFlag", True)
 # ターゲットコンフィグフォルダーの取得
 target_config_folder = acproject.get_global_folder("TargetConfigFolder")["data"]
-# PCターゲットコンフィグの取得
+# ターゲットコンフィグの取得
 target_config_public = acproject.get_child_object(target_config_folder, "TargetConfigPublic", "Public")["data"]
 
 result = acbuild.build_cuesheet(cuesheet, target_config_public, None)["succeed"]

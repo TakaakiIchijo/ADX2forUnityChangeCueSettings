@@ -18,6 +18,10 @@ public class ChangeCueLimit : EditorWindow
 
     [SerializeField]
     private string atomCraftDirectory,atomProjectPath;
+    [SerializeField] 
+    private string workUnitName = "WorkUnit_0";
+    [SerializeField] 
+    private string cueSheetFolderName = "WorkUnit_0";
     [SerializeField]
     private string cueSheetName, cueName; 
     
@@ -37,6 +41,8 @@ public class ChangeCueLimit : EditorWindow
     {
         atomCraftDirectory = EditorGUILayout.TextField("Atom Craft Directory Path", atomCraftDirectory); 
         atomProjectPath = EditorGUILayout.TextField(".atmcproject Path", atomProjectPath); 
+        workUnitName = EditorGUILayout.TextField("Work Unit Name", workUnitName); 
+        cueSheetFolderName = EditorGUILayout.TextField("Work Unit Name", cueSheetFolderName); 
         cueSheetName = EditorGUILayout.TextField("Cue Sheet Name", cueSheetName); 
         cueName = EditorGUILayout.TextField("Cue Name", cueName);
 
@@ -60,7 +66,7 @@ public class ChangeCueLimit : EditorWindow
         
         if( GUILayout.Button( "Set and Build", GUILayout.Height(60) ) )
         {
-            PythonGen(cueSheetName, cueName, cueLimit, priorityType);
+            PythonGen();
             AttachAndBuild();
         }
     }
@@ -90,7 +96,7 @@ public class ChangeCueLimit : EditorWindow
         }
     }
 
-    private void PythonGen(string cueSheetName, string cueName,int cueLimit, CuePriorityType priority)
+    private void PythonGen()
     {
         var path = Directory.GetParent(Application.dataPath) +"/"+pythonScriptDirectoryName;
 
@@ -109,10 +115,12 @@ public class ChangeCueLimit : EditorWindow
         using (StreamReader changeCueLimitBaseText = new StreamReader(Application.dataPath+"/"+pythonBaseScriptDirectoryName+"/"+changeCueLimitPythonBaseFileName))
         using (StreamWriter sw = File.CreateText(pythonScriptPath))
         {
+            sw.WriteLine("WORK_UNIT_NAME = \""+workUnitName+"\"");
+            sw.WriteLine("CUE_SHEET_FOLDER_NAME = \""+cueSheetFolderName+"\"");
             sw.WriteLine("CUE_SHEET_NAME = \""+cueSheetName+"\"");
             sw.WriteLine("CUE_NAME = \""+cueName+"\"");
             sw.WriteLine("CUE_LIMIT_NUM = "+cueLimit);
-            sw.WriteLine("CUE_PRIORITY_TYPE = \""+priority.ToString()+"\"");
+            sw.WriteLine("CUE_PRIORITY_TYPE = \""+priorityType.ToString()+"\"");
             sw.Write(changeCueLimitBaseText.ReadToEnd());
         }
     }
