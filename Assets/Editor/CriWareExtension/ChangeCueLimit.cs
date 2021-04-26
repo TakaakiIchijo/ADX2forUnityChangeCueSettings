@@ -42,7 +42,7 @@ public class ChangeCueLimit : EditorWindow
         atomCraftDirectory = EditorGUILayout.TextField("Atom Craft Directory Path", atomCraftDirectory); 
         atomProjectPath = EditorGUILayout.TextField(".atmcproject Path", atomProjectPath); 
         workUnitName = EditorGUILayout.TextField("Work Unit Name", workUnitName); 
-        cueSheetFolderName = EditorGUILayout.TextField("Work Unit Name", cueSheetFolderName); 
+        cueSheetFolderName = EditorGUILayout.TextField("Cue Sheet Folder Name", cueSheetFolderName); 
         cueSheetName = EditorGUILayout.TextField("Cue Sheet Name", cueSheetName); 
         cueName = EditorGUILayout.TextField("Cue Name", cueName);
 
