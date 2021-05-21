@@ -10,7 +10,7 @@ ADX2の「ロボット機能」を使用するため、セットアップが必�
 https://game.criware.jp/learn/tutorial/atomcraft/atomcraft_robot_01/
 
 ## 現在できること
-- 再生数上限（キューリミット）のへ脳
+- 再生数上限（キューリミット）の変更
 - 先着優先・後着優先の変更
 
 ![image](images/image.png)
